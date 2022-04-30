@@ -1,0 +1,5 @@
+.list-item{
+    display: flex;
+    flex-wrap: wrap;
+    /* transition: transform 0.2s; */
+  }

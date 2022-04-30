@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./component/Home/Home";
+import { Login } from "./component/Login/Login";
+import Services from "./component/Service/Services";
+import { Signup } from "./component/Signup/Signup";
+import User from "./component/User/User";
+import {Header} from './component/Header/Header';
+import PrivateRoutes from "./Routes/PrivateRoutes/PrivateRoutes";
+import ProductList from "./component/ProductList/ProductList";
+import { ProductDisplay } from "./Product/ProductDisplay";
 
-function App() {
+export function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          {/* start Private routes */}
+          <Route element={<PrivateRoutes />}>
+            <Route path="/user" element={<User />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/product" element={<ProductList />} />
+          </Route>
+          {/* end Private routes */}
+
+          {/* start public routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          {/* end public routes */}
+        </Routes>
+      </BrowserRouter>
+      <ProductDisplay />
+    </>
   );
 }
-
-export default App;
